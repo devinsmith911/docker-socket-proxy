@@ -1,0 +1,17 @@
+---
+version: '3.6'
+
+services:
+  docksockprox:
+    image: devinsmith/docksockprox:latest
+    env_file: .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - target: 2375
+        published: 2375
+        mode: host
+    deploy:
+      mode: global
+      restart_policy:
+        condition: any
