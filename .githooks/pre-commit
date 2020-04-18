@@ -14,7 +14,9 @@ for x in $arr;
 do 
 if [[ "$x" == *"docker-compose"* ]]; then
     echo "TESTING $x"
-    docker-compose -f $x config
+    test=`docker-compose -f $x config`
+	echo $test
+	echo $?
    fi;
 done;
 
