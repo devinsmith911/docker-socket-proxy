@@ -7,7 +7,8 @@
 #
 # To enable this hook, rename this file to "pre-commit".
 
-exec  git diff-tree --name-only HEAD
+arr=($(git diff-tree --name-only HEAD))
+exec echo $arr
 
 # If you want to allow non-ASCII filenames set this variable to true.
 #allownonascii=$(git config --type=bool hooks.allownonascii)
