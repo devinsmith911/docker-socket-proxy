@@ -1,2 +1,10 @@
+IFS='\n'
 arr=($(git diff-tree --name-only --no-commit-id HEAD))
-for x in $arr; do echo $x; done
+unset IFS
+for x in $arr; 
+do 
+if [[ "$x" == *"docker-compose"* ]]; then
+    echo "TESTING $x"
+    docker-compose -f $x config
+   fi;
+done;

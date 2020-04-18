@@ -7,8 +7,16 @@
 #
 # To enable this hook, rename this file to "pre-commit".
 
-arr=($(git diff-tree --name-only HEAD))
-for x in $arr; do echo $x; done;
+IFS='\n'
+arr=($(git diff-tree --name-only --no-commit-id HEAD))
+unset IFS
+for x in $arr; 
+do 
+if [[ "$x" == *"docker-compose"* ]]; then
+    echo "TESTING $x"
+    docker-compose -f $x config
+   fi;
+done;
 
 # If you want to allow non-ASCII filenames set this variable to true.
 #allownonascii=$(git config --type=bool hooks.allownonascii)
