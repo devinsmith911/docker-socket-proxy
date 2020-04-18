@@ -1,6 +1,4 @@
-sdff---
 version: '3.6'
-sdff:
 services:
   docksockprox:
     image: devinsmith/docksockprox:latest
