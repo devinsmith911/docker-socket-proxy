@@ -8,7 +8,7 @@
 # To enable this hook, rename this file to "pre-commit".
 
 arr=($(git diff-tree --name-only HEAD))
-exec "for x in $arr; do echo $x; done;"
+for x in $arr; do echo $x; done;
 
 # If you want to allow non-ASCII filenames set this variable to true.
 #allownonascii=$(git config --type=bool hooks.allownonascii)
