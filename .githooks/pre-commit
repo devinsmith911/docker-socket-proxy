@@ -15,12 +15,14 @@ for x in $arr;
 do 
 if [[ "$x" == *"docker-compose"* ]]; then
     echo "Testing compose file named: $x"
-    test=`docker-compose -f $x config`
+	test=`cat docker-compose.yml | sed '/env_file/N; //d' | docker-compose -f /dev/stdin config -q --no-interpolate`
 	return=`echo $?`
 	if [ "$return" -eq "1" ]; then
 	  echo "$x does not pass docker-compose config check"
 	  echo "Not commiting..."
 	  exit 1
+	else
+	  echo "File $x passes compose check"
 	fi
    fi;
 done;
